@@ -93,10 +93,12 @@ files: {
 
 + Hot formatting - overwrite src files with it formatted copy. Set `src` option instead of `files`. This format can be used with globe patterns.
 ```
-src: [
-  "my-awesome-project/**.js",
-  "!my-awesome-project/**.config.js"
-]
+files: {
+  src: [
+    "my-awesome-project/**.js",
+    "!my-awesome-project/**.config.js"
+  ]
+}
 ```
 
 ## Contributing
