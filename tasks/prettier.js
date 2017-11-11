@@ -8,7 +8,9 @@
 
 "use strict";
 
-var prettier = require("prettier");
+var prettier = require("prettier"),
+  path = require("path"),
+  fs = require("fs");
 
 module.exports = function(grunt) {
   grunt.registerMultiTask("prettier", "Prettier plugin for Grunt", function() {
@@ -24,6 +26,13 @@ module.exports = function(grunt) {
       parser: "babylon",
       semi: true
     });
+
+    // If .prettierrc file exists, load it and override existing options
+    var prettierrcPath = path.resolve() + path.sep + ".prettierrc";
+    if (fs.existsSync(prettierrcPath)) {
+      var prettierrcOptions = grunt.file.readJSON(".prettierrc");
+      options = Object.assign({}, options, prettierrcOptions);
+    }
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {

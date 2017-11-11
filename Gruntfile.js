@@ -20,7 +20,8 @@ module.exports = function(grunt) {
     prettier: {
       default_options: {
         files: {
-          "tmp/formatted_default_options.js": "test/fixtures/default_options/unformatted.js"
+          "tmp/formatted_default_options.js":
+            "test/fixtures/default_options/unformatted.js"
         }
       },
       concat_files: {
@@ -61,7 +62,8 @@ module.exports = function(grunt) {
     copy: {
       write_to_original_file: {
         files: {
-          "tmp/formatted_write_to_original_file.js": "test/fixtures/write_to_original_file/unformatted.js"
+          "tmp/formatted_write_to_original_file.js":
+            "test/fixtures/write_to_original_file/unformatted.js"
         }
       },
       write_to_original_file_with_globe: {
