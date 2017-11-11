@@ -6,31 +6,31 @@
  * Licensed under the MIT license.
  */
 
-"use strict";
+'use strict';
 
-var prettier = require("prettier"),
-  path = require("path"),
-  fs = require("fs");
+var prettier = require('prettier'),
+  path = require('path'),
+  fs = require('fs');
 
 module.exports = function(grunt) {
-  grunt.registerMultiTask("prettier", "Prettier plugin for Grunt", function() {
+  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       useTabs: false,
       printWidth: 80,
       tabWidth: 2,
       singleQuote: false,
-      trailingComma: "none",
+      trailingComma: 'none',
       bracketSpacing: true,
       jsxBracketSameLine: false,
-      parser: "babylon",
+      parser: 'babylon',
       semi: true
     });
 
     // If .prettierrc file exists, load it and override existing options
-    var prettierrcPath = path.resolve() + path.sep + ".prettierrc";
+    var prettierrcPath = path.resolve() + path.sep + '.prettierrc';
     if (fs.existsSync(prettierrcPath)) {
-      var prettierrcOptions = grunt.file.readJSON(".prettierrc");
+      var prettierrcOptions = grunt.file.readJSON('.prettierrc');
       options = Object.assign({}, options, prettierrcOptions);
     }
 
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 
       var formattedCode, unformattedCode;
 
-      if (typeof f.dest === "undefined") {
+      if (typeof f.dest === 'undefined') {
         // If f.dest is undefined, then write formatted code to original files.
         codeFiles.map(function(filepath) {
           unformattedCode = grunt.file.read(filepath);
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
           return grunt.file.read(filepath);
         });
 
-        formattedCode = prettier.format(unformattedCode.join(""), options);
+        formattedCode = prettier.format(unformattedCode.join(''), options);
         grunt.file.write(f.dest, formattedCode);
         grunt.log.writeln('Prettify file "' + f.dest + '".');
       }

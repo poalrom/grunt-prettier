@@ -39,6 +39,12 @@ grunt.initConfig({
 
 All options you can see in [official Prettier repo](https://github.com/prettier/prettier#options).
 
+You can put `.prettierrc` near Gruntfile.js.
+Options from `.prettierrc` merge with task config and default options in next order:
+`[default config] < [task config] < [.prettierrc]`.
+
+**You dont need to add path to config file to task definition!**
+
 ### Usage Examples
 
 #### Default Options

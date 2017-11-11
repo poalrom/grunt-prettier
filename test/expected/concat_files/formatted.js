@@ -1,21 +1,21 @@
 var OPTIONS = [
-  "printWidth",
-  "tabWidth",
-  "singleQuote",
-  "trailingComma",
-  "bracketSpacing",
-  "jsxBracketSameLine",
-  "parser",
-  "semi",
-  "useTabs",
-  "doc"
+  'printWidth',
+  'tabWidth',
+  'singleQuote',
+  'trailingComma',
+  'bracketSpacing',
+  'jsxBracketSameLine',
+  'parser',
+  'semi',
+  'useTabs',
+  'doc'
 ];
 function setOptions(options) {
   OPTIONS.forEach(function(option) {
     var elem = document.getElementById(option);
-    if (elem.tagName === "SELECT") {
+    if (elem.tagName === 'SELECT') {
       elem.value = options[option];
-    } else if (elem.type === "number") {
+    } else if (elem.type === 'number') {
       elem.value = options[option];
     } else {
       elem.checked = options[option];
@@ -27,9 +27,9 @@ function getOptions() {
   var options = {};
   OPTIONS.forEach(function(option) {
     var elem = document.getElementById(option);
-    if (elem.tagName === "SELECT") {
+    if (elem.tagName === 'SELECT') {
       options[option] = elem.value;
-    } else if (elem.type === "number") {
+    } else if (elem.type === 'number') {
       options[option] = Number(elem.value);
     } else {
       options[option] = elem.checked;
@@ -46,9 +46,9 @@ function omitNonFormatterOptions(options) {
 
 function replaceHash(hash) {
   if (
-    typeof URL === "function" &&
-    typeof history === "object" &&
-    typeof history.replaceState === "function"
+    typeof URL === 'function' &&
+    typeof history === 'object' &&
+    typeof history.replaceState === 'function'
   ) {
     var url = new URL(location);
     url.hash = hash;
@@ -61,13 +61,13 @@ function replaceHash(hash) {
 function format() {
   var options = getOptions();
   [docEditor, outputEditor].forEach(function(editor) {
-    editor.setOption("rulers", [
-      { column: options.printWidth, color: "#444444" }
+    editor.setOption('rulers', [
+      { column: options.printWidth, color: '#444444' }
     ]);
   });
-  document.getElementsByClassName("doc")[0].style.display = options.doc
-    ? "flex"
-    : "none";
+  document.getElementsByClassName('doc')[0].style.display = options.doc
+    ? 'flex'
+    : 'none';
 
   var value = encodeURIComponent(
     JSON.stringify(
@@ -99,53 +99,53 @@ function format() {
   }
 }
 
-document.getElementsByClassName("options")[0].onchange = format;
+document.getElementsByClassName('options')[0].onchange = format;
 
 var editorOptions = {
   lineNumbers: true,
-  keyMap: "sublime",
+  keyMap: 'sublime',
   autoCloseBrackets: true,
   matchBrackets: true,
   showCursorWhenSelecting: true,
-  theme: "base16-dark",
+  theme: 'base16-dark',
   tabWidth: 2
 };
 var inputEditor = CodeMirror.fromTextArea(
-  document.getElementById("input-editor"),
+  document.getElementById('input-editor'),
   editorOptions
 );
-inputEditor.on("change", format);
+inputEditor.on('change', format);
 
-var docEditor = CodeMirror.fromTextArea(document.getElementById("doc-editor"), {
+var docEditor = CodeMirror.fromTextArea(document.getElementById('doc-editor'), {
   readOnly: true,
   lineNumbers: true,
-  theme: "base16-dark"
+  theme: 'base16-dark'
 });
 
 var outputEditor = CodeMirror.fromTextArea(
-  document.getElementById("output-editor"),
-  { readOnly: true, lineNumbers: true, theme: "base16-dark" }
+  document.getElementById('output-editor'),
+  { readOnly: true, lineNumbers: true, theme: 'base16-dark' }
 );
 
-document.getElementsByClassName("version")[0].innerText = prettier.version;
+document.getElementsByClassName('version')[0].innerText = prettier.version;
 var OPTIONS = [
-  "printWidth",
-  "tabWidth",
-  "singleQuote",
-  "trailingComma",
-  "bracketSpacing",
-  "jsxBracketSameLine",
-  "parser",
-  "semi",
-  "useTabs",
-  "doc"
+  'printWidth',
+  'tabWidth',
+  'singleQuote',
+  'trailingComma',
+  'bracketSpacing',
+  'jsxBracketSameLine',
+  'parser',
+  'semi',
+  'useTabs',
+  'doc'
 ];
 function setOptions(options) {
   OPTIONS.forEach(function(option) {
     var elem = document.getElementById(option);
-    if (elem.tagName === "SELECT") {
+    if (elem.tagName === 'SELECT') {
       elem.value = options[option];
-    } else if (elem.type === "number") {
+    } else if (elem.type === 'number') {
       elem.value = options[option];
     } else {
       elem.checked = options[option];
@@ -157,9 +157,9 @@ function getOptions() {
   var options = {};
   OPTIONS.forEach(function(option) {
     var elem = document.getElementById(option);
-    if (elem.tagName === "SELECT") {
+    if (elem.tagName === 'SELECT') {
       options[option] = elem.value;
-    } else if (elem.type === "number") {
+    } else if (elem.type === 'number') {
       options[option] = Number(elem.value);
     } else {
       options[option] = elem.checked;
@@ -176,9 +176,9 @@ function omitNonFormatterOptions(options) {
 
 function replaceHash(hash) {
   if (
-    typeof URL === "function" &&
-    typeof history === "object" &&
-    typeof history.replaceState === "function"
+    typeof URL === 'function' &&
+    typeof history === 'object' &&
+    typeof history.replaceState === 'function'
   ) {
     var url = new URL(location);
     url.hash = hash;
@@ -191,13 +191,13 @@ function replaceHash(hash) {
 function format() {
   var options = getOptions();
   [docEditor, outputEditor].forEach(function(editor) {
-    editor.setOption("rulers", [
-      { column: options.printWidth, color: "#444444" }
+    editor.setOption('rulers', [
+      { column: options.printWidth, color: '#444444' }
     ]);
   });
-  document.getElementsByClassName("doc")[0].style.display = options.doc
-    ? "flex"
-    : "none";
+  document.getElementsByClassName('doc')[0].style.display = options.doc
+    ? 'flex'
+    : 'none';
 
   var value = encodeURIComponent(
     JSON.stringify(
@@ -229,32 +229,32 @@ function format() {
   }
 }
 
-document.getElementsByClassName("options")[0].onchange = format;
+document.getElementsByClassName('options')[0].onchange = format;
 
 var editorOptions = {
   lineNumbers: true,
-  keyMap: "sublime",
+  keyMap: 'sublime',
   autoCloseBrackets: true,
   matchBrackets: true,
   showCursorWhenSelecting: true,
-  theme: "base16-dark",
+  theme: 'base16-dark',
   tabWidth: 2
 };
 var inputEditor = CodeMirror.fromTextArea(
-  document.getElementById("input-editor"),
+  document.getElementById('input-editor'),
   editorOptions
 );
-inputEditor.on("change", format);
+inputEditor.on('change', format);
 
-var docEditor = CodeMirror.fromTextArea(document.getElementById("doc-editor"), {
+var docEditor = CodeMirror.fromTextArea(document.getElementById('doc-editor'), {
   readOnly: true,
   lineNumbers: true,
-  theme: "base16-dark"
+  theme: 'base16-dark'
 });
 
 var outputEditor = CodeMirror.fromTextArea(
-  document.getElementById("output-editor"),
-  { readOnly: true, lineNumbers: true, theme: "base16-dark" }
+  document.getElementById('output-editor'),
+  { readOnly: true, lineNumbers: true, theme: 'base16-dark' }
 );
 
-document.getElementsByClassName("version")[0].innerText = prettier.version;
+document.getElementsByClassName('version')[0].innerText = prettier.version;
