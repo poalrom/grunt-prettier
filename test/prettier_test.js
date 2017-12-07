@@ -65,6 +65,7 @@ exports.prettier = {
     test.expect(filesWithDifferentExtension.length);
 
     filesWithDifferentExtension.forEach(file => {
+      console.log(`File ${file}`);
       let actual = grunt.file.read(`tmp/different_extensions/${file}`);
       let expected = grunt.file.read(
         `test/expected/different_extensions/${file}`
