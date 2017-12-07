@@ -35,7 +35,11 @@
   "keywords": [
     "gruntplugin",
     "prettier",
-    "grunt-prettier"
+    "grunt-prettier",
+    "grunt-scss-prettify",
+    "grunt-css-prettify",
+    "grunt-json-prettify",
+    "grunt-less-prettify"
   ],
   "dependencies": {
     "prettier": "^1.8.2"

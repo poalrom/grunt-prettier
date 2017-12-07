@@ -1,5 +1,7 @@
 # grunt-prettier
 
+[![npm version](https://badge.fury.io/js/grunt-prettier.svg)](https://badge.fury.io/js/grunt-prettier)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4db7a8ea778068692759/maintainability)](https://codeclimate.com/github/poalrom/grunt-prettier/maintainability)
 > Prettier plugin for Grunt
 
 ## Getting Started
@@ -111,4 +113,5 @@ files: {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+*0.3* - Add support of different file types, like scss, json, etc.
+*0.2* - Add .prettierrc support

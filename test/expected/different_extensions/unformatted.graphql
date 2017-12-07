@@ -1,0 +1,8 @@
+interface User {
+  id: String!
+  createdAt: String!
+  lastModifiedAt: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+}

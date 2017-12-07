@@ -1,0 +1,47 @@
+var fs = require('fs'),
+  path = require('path');
+testTask('Jake', function() {
+  this.testFiles.include('test/*.js'),
+    this.testFiles.exclude('test/helpers.js');
+}),
+  namespace('doc', function() {
+    task(
+      'generate',
+      ['doc:clobber'],
+      function() {
+        jake.logger.log('Generating docs ...'),
+          jake.exec(
+            [
+              '../node-jsdoc-toolkit/app/run.js -n -r=100 -t=../node-jsdoc-toolkit/templates/codeview -d=./doc/ ./lib'
+            ],
+            function() {
+              jake.logger.log('Done.'), complete();
+            }
+          );
+      },
+      { async: !0 }
+    ),
+      task(
+        'clobber',
+        function() {
+          jake.exec(['rm -fr ./doc/*'], function() {
+            jake.logger.log('Clobbered old docs.'), complete();
+          });
+        },
+        { async: !0 }
+      );
+  }),
+  desc('Generate docs for Jake'),
+  task('doc', ['doc:generate']),
+  npmPublishTask('jake', function() {
+    this.packageFiles.include([
+      'Makefile',
+      'Jakefile',
+      'README.md',
+      'package.json',
+      'lib/**',
+      'bin/**',
+      'test/**'
+    ]),
+      this.packageFiles.exclude(['test/tmp']);
+  });
