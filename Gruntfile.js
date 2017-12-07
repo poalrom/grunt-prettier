@@ -24,7 +24,7 @@ function tasks(grunt) {
             'test/fixtures/override_with_prettierrc/unformatted.js'
         }
       },
-      tests: {
+      different_extensions: {
         files: {
           'tmp/different_extensions/.arcconfig':
             'test/fixtures/different_extensions/.arcconfig',
@@ -42,42 +42,26 @@ function tasks(grunt) {
             'test/fixtures/different_extensions/Jakefile',
           'tmp/different_extensions/mcmod.info':
             'test/fixtures/different_extensions/mcmod.info',
-          'tmp/different_extensions/README':
-            'test/fixtures/different_extensions/README',
-          'tmp/different_extensions/unformatted.gql':
-            'test/fixtures/different_extensions/unformatted.gql',
-          'tmp/different_extensions/unformatted.graphql':
-            'test/fixtures/different_extensions/unformatted.graphql',
-          'tmp/different_extensions/unformatted.json':
-            'test/fixtures/different_extensions/unformatted.json',
-          'tmp/different_extensions/unformatted.less':
-            'test/fixtures/different_extensions/unformatted.less',
-          'tmp/different_extensions/unformatted.markdown':
-            'test/fixtures/different_extensions/unformatted.markdown',
-          'tmp/different_extensions/unformatted.md':
-            'test/fixtures/different_extensions/unformatted.md',
-          'tmp/different_extensions/unformatted.mdown':
-            'test/fixtures/different_extensions/unformatted.mdown',
-          'tmp/different_extensions/unformatted.mdwn':
-            'test/fixtures/different_extensions/unformatted.mdwn',
-          'tmp/different_extensions/unformatted.mkd':
-            'test/fixtures/different_extensions/unformatted.mkd',
-          'tmp/different_extensions/unformatted.mkdn':
-            'test/fixtures/different_extensions/unformatted.mkdn',
-          'tmp/different_extensions/unformatted.mkdown':
-            'test/fixtures/different_extensions/unformatted.mkdown',
-          'tmp/different_extensions/unformatted.scss':
-            'test/fixtures/different_extensions/unformatted.scss',
-          'tmp/different_extensions/unformatted.ts':
-            'test/fixtures/different_extensions/unformatted.ts',
-          'tmp/different_extensions/unformatted.tsx':
-            'test/fixtures/different_extensions/unformatted.tsx',
-          'tmp/different_extensions/unformatted.jsx':
-            'test/fixtures/different_extensions/unformatted.jsx',
-          'tmp/different_extensions/unformatted.js':
-            'test/fixtures/different_extensions/unformatted.js',
-          'tmp/different_extensions/unformatted.css':
-            'test/fixtures/different_extensions/unformatted.css'
+          'tmp/different_extensions/gql.gql':
+            'test/fixtures/different_extensions/gql.gql',
+          'tmp/different_extensions/graphql.graphql':
+            'test/fixtures/different_extensions/graphql.graphql',
+          'tmp/different_extensions/json.json':
+            'test/fixtures/different_extensions/json.json',
+          'tmp/different_extensions/less.less':
+            'test/fixtures/different_extensions/less.less',
+          'tmp/different_extensions/scss.scss':
+            'test/fixtures/different_extensions/scss.scss',
+          'tmp/different_extensions/ts.ts':
+            'test/fixtures/different_extensions/ts.ts',
+          'tmp/different_extensions/tsx.tsx':
+            'test/fixtures/different_extensions/tsx.tsx',
+          'tmp/different_extensions/jsx.jsx':
+            'test/fixtures/different_extensions/jsx.jsx',
+          'tmp/different_extensions/js.js':
+            'test/fixtures/different_extensions/js.js',
+          'tmp/different_extensions/css.css':
+            'test/fixtures/different_extensions/css.css'
         }
       },
       concat_files: {
