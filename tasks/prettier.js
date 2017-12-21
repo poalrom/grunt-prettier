@@ -86,10 +86,9 @@ function prettierTask(grunt) {
         // If f.dest is undefined, then write formatted code to original files.
         codeFiles.map(function(filepath) {
           unformattedCode = grunt.file.read(filepath);
-          formattedCode = prettier.format(unformattedCode, {
-            ...options,
-            parser: getParser(filepath, options.parser)
-          });
+          formattedCode = prettier.format(unformattedCode, 
+            Object.assign({ parser: getParser(filepath, options.parser) }, options)
+          );
           grunt.file.write(filepath, formattedCode);
           grunt.log.writeln('Prettify file "' + filepath + '".');
         });
@@ -99,10 +98,9 @@ function prettierTask(grunt) {
           return grunt.file.read(filepath);
         });
 
-        formattedCode = prettier.format(unformattedCode.join(''), {
-          ...options,
-          parser: getParser(codeFiles[0], options.parser)
-        });
+        formattedCode = prettier.format(unformattedCode.join(''),
+          Object.assign({ parser: getParser(codeFiles[0], options.parser) }, options)
+        );
         grunt.file.write(f.dest, formattedCode);
         grunt.log.writeln('Prettify file "' + f.dest + '".');
       }
