@@ -87,7 +87,7 @@ function prettierTask(grunt) {
         codeFiles.map(function(filepath) {
           unformattedCode = grunt.file.read(filepath);
           formattedCode = prettier.format(unformattedCode, 
-            Object.assign({ parser: getParser(filepath, options.parser) }, options)
+            Object.assign({}, options, { parser: getParser(filepath, options.parser) })
           );
           grunt.file.write(filepath, formattedCode);
           grunt.log.writeln('Prettify file "' + filepath + '".');
@@ -99,7 +99,7 @@ function prettierTask(grunt) {
         });
 
         formattedCode = prettier.format(unformattedCode.join(''),
-          Object.assign({ parser: getParser(codeFiles[0], options.parser) }, options)
+          Object.assign({}, options, { parser: getParser(codeFiles[0], options.parser) })
         );
         grunt.file.write(f.dest, formattedCode);
         grunt.log.writeln('Prettify file "' + f.dest + '".');
