@@ -114,6 +114,6 @@ files: {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-*0.4* - Add support of older npm version
-*0.3* - Add support of different file types, like scss, json, etc.
+*0.4* - Add support of older npm version  
+*0.3* - Add support of different file types, like scss, json, etc.  
 *0.2* - Add .prettierrc support
