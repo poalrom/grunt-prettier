@@ -90,7 +90,7 @@ files: {
 }
 ```
 
-+ Concat and format - concat all source files, **then** format and put to destination file. This format can be used with globe patterns.
++ Concat and format - concat all source files, **then** format and put to destination file. This format can be used with glob patterns.
 ```
 files: {
   "dest/formatted.js": [
@@ -100,7 +100,7 @@ files: {
 }
 ```
 
-+ Hot formatting - overwrite src files with it formatted copy. Set `src` option instead of `files`. This format can be used with globe patterns.
++ Hot formatting - overwrite src files with it formatted copy. Set `src` option instead of `files`. This format can be used with glob patterns.
 ```
 files: {
   src: [
