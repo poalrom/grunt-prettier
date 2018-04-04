@@ -49,6 +49,7 @@ function prettierTask(grunt) {
   grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     let options = this.options({
+      configFile: '.prettierrc',
       useTabs: false,
       printWidth: 80,
       tabWidth: 2,
@@ -61,9 +62,13 @@ function prettierTask(grunt) {
     });
 
     // If .prettierrc file exists, load it and override existing options
-    let prettierrcPath = path.resolve() + path.sep + '.prettierrc';
+    let prettierrcPath = path.resolve() + path.sep + options.configFile;
     if (fs.existsSync(prettierrcPath)) {
-      let prettierrcOptions = grunt.file.readJSON('.prettierrc');
+      grunt.log.writeln(`Using options from ${options.configFile}`);
+      const prettierrcOptions = options.configFile.endsWith('.js')
+        ? require(options.configFile)
+        : grunt.file.readYAML(options.configFile);
+      delete options.configFile;
       options = Object.assign({}, options, prettierrcOptions);
     }
 
