@@ -68,9 +68,9 @@ function prettierTask(grunt) {
       const prettierrcOptions = options.configFile.endsWith('.js')
         ? require(options.configFile)
         : grunt.file.readYAML(options.configFile);
-      delete options.configFile;
       options = Object.assign({}, options, prettierrcOptions);
     }
+    delete options.configFile;
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
