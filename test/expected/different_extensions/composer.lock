@@ -16,8 +16,7 @@
       },
       "dist": {
         "type": "zip",
-        "url":
-          "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/73291192229eef1bdd718c19cadf913ac81a8937",
+        "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/73291192229eef1bdd718c19cadf913ac81a8937",
         "reference": "73291192229eef1bdd718c19cadf913ac81a8937",
         "shasum": ""
       },
@@ -77,8 +76,7 @@
       },
       "dist": {
         "type": "zip",
-        "url":
-          "https://api.github.com/repos/giggsey/Locale/zipball/8238764fa3f2c5bd8bdf981e2e019401d49229e3",
+        "url": "https://api.github.com/repos/giggsey/Locale/zipball/8238764fa3f2c5bd8bdf981e2e019401d49229e3",
         "reference": "8238764fa3f2c5bd8bdf981e2e019401d49229e3",
         "shasum": ""
       },
@@ -119,8 +117,7 @@
       },
       "dist": {
         "type": "zip",
-        "url":
-          "https://api.github.com/repos/twigphp/Twig/zipball/ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
+        "url": "https://api.github.com/repos/twigphp/Twig/zipball/ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
         "reference": "ddc9e3e20ee9c0b6908f401ac8353635b750eca7",
         "shasum": ""
       },
@@ -152,8 +149,7 @@
           "role": "Contributors"
         }
       ],
-      "description":
-        "Twig, the flexible, fast, and secure template language for PHP",
+      "description": "Twig, the flexible, fast, and secure template language for PHP",
       "homepage": "http://twig.sensiolabs.org",
       "keywords": ["templating"],
       "time": "2017-01-11T19:36:15+00:00"
@@ -168,8 +164,7 @@
       },
       "dist": {
         "type": "zip",
-        "url":
-          "https://api.github.com/repos/umpirsky/country-list/zipball/6fbb672c820607af601f1e918cff540f79d9e6bd",
+        "url": "https://api.github.com/repos/umpirsky/country-list/zipball/6fbb672c820607af601f1e918cff540f79d9e6bd",
         "reference": "6fbb672c820607af601f1e918cff540f79d9e6bd",
         "shasum": ""
       },
@@ -192,8 +187,7 @@
       "authors": [
         { "name": "Саша Стаменковић", "email": "umpirsky@gmail.com" }
       ],
-      "description":
-        "List of all countries with names and ISO 3166-1 codes in all languages and data formats.",
+      "description": "List of all countries with names and ISO 3166-1 codes in all languages and data formats.",
       "time": "2015-02-02T18:18:35+00:00"
     }
   ],

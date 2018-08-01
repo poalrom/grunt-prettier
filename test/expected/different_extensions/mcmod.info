@@ -2,8 +2,7 @@
   {
     "modid": "mod_BuildCraftCore",
     "name": "BuildCraft 3",
-    "description":
-      "Extending Minecraft with pipes, auto-crafting, quarries, engines and much more!",
+    "description": "Extending Minecraft with pipes, auto-crafting, quarries, engines and much more!",
     "version": "",
     "credits": "Created by SpaceToad",
     "logoFile": "/gfx/buildcraft/logo.png",
