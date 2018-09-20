@@ -30,6 +30,7 @@ grunt.initConfig({
   prettier: {
     options: {
       // Task-specific options go here.
+      progress: false // By default, a progress bar is not shown. You can opt into this behavior by passing true.
     },
     your_target: {
       // Target-specific file lists and/or options go here.

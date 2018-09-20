@@ -18,6 +18,9 @@ function tasks(grunt) {
 
     // Configuration to be run (and then tested).
     prettier: {
+      // options: {
+      //   progress: true
+      // },
       override_with_prettierrc: {
         files: {
           'tmp/formatted_override_with_prettierrc.js':
