@@ -10,7 +10,8 @@
 
 const prettier = require('prettier'),
   path = require('path'),
-  fs = require('fs');
+  fs = require('fs'),
+  ProgressBar = require('progress');
 
 let fileExtToParser = {};
 let fileNameToParser = {};
@@ -58,13 +59,17 @@ function prettierTask(grunt) {
       bracketSpacing: true,
       jsxBracketSameLine: false,
       parser: 'babylon',
-      semi: true
+      semi: true,
+      progress: false
     });
+
+    const progress = options.progress;
+    delete options.progress;
 
     // If .prettierrc file exists, load it and override existing options
     let prettierrcPath = path.resolve() + path.sep + options.configFile;
     if (fs.existsSync(prettierrcPath)) {
-      grunt.log.writeln(`Using options from ${options.configFile}`);
+      grunt.verbose.writeln(`Using options from ${options.configFile}`);
       const prettierrcOptions = options.configFile.endsWith('.js')
         ? require(options.configFile)
         : grunt.file.readYAML(options.configFile);
@@ -85,6 +90,14 @@ function prettierTask(grunt) {
         }
       });
 
+      let bar;
+      if (progress) {
+        bar = new ProgressBar(':bar / :percent complete, ETA: :eta second(s)', {
+          total: codeFiles.length,
+          width: 30
+        });
+      }
+
       let formattedCode, unformattedCode;
 
       if (typeof f.dest === 'undefined') {
@@ -98,7 +111,11 @@ function prettierTask(grunt) {
             })
           );
           grunt.file.write(filepath, formattedCode);
-          grunt.log.writeln('Prettify file "' + filepath + '".');
+          if (progress) {
+            bar.tick();
+          } else {
+            grunt.log.writeln('Prettify file "' + filepath + '".');
+          }
         });
       } else {
         // Else concat files and write to destination file.
@@ -113,7 +130,11 @@ function prettierTask(grunt) {
           })
         );
         grunt.file.write(f.dest, formattedCode);
-        grunt.log.writeln('Prettify file "' + f.dest + '".');
+        if (progress) {
+          bar.tick();
+        } else {
+          grunt.log.writeln('Prettify file "' + f.dest + '".');
+        }
       }
     });
   });
