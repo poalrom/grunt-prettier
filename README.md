@@ -115,6 +115,7 @@ files: {
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+*1.1* - Add progress bar support  
 *1.0* - Update grunt version to major because of vunerable dependencies. Update prettier version with small fixes  
 *0.6* - Update prettier version  
 *0.5* - Add support of other config formats  
