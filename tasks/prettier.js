@@ -9,21 +9,21 @@
 'use strict';
 
 const prettier = require('prettier'),
-    path = require('path'),
-    fs = require('fs'),
-    ProgressBar = require('progress');
+  path = require('path'),
+  fs = require('fs'),
+  ProgressBar = require('progress');
 
 let fileExtToParser = {};
 let fileNameToParser = {};
 prettier.getSupportInfo().languages.forEach(lang => {
   lang.extensions.forEach(extension => {
-  fileExtToParser[extension] = lang.parsers;
-});
-if (lang.filenames) {
-  lang.filenames.forEach(filename => {
-    fileNameToParser[filename] = lang.parsers;
-});
-}
+    fileExtToParser[extension] = lang.parsers;
+  });
+  if (lang.filenames) {
+    lang.filenames.forEach(filename => {
+      fileNameToParser[filename] = lang.parsers;
+    });
+  }
 });
 
 function getParser(file, defaultParser) {
@@ -31,16 +31,16 @@ function getParser(file, defaultParser) {
   let fileName = path.basename(file);
   if (fileExtToParser.hasOwnProperty(fileExt)) {
     let parser =
-        defaultParser in fileExtToParser[fileExt]
-            ? defaultParser
-            : fileExtToParser[fileExt][0];
+      defaultParser in fileExtToParser[fileExt]
+        ? defaultParser
+        : fileExtToParser[fileExt][0];
     return parser;
   }
   if (fileNameToParser.hasOwnProperty(fileName)) {
     let parser =
-        defaultParser in fileNameToParser[fileName]
-            ? defaultParser
-            : fileNameToParser[fileName][0];
+      defaultParser in fileNameToParser[fileName]
+        ? defaultParser
+        : fileNameToParser[fileName][0];
     return parser;
   }
   return defaultParser;
@@ -74,7 +74,8 @@ function prettierTask(grunt) {
       jsxBracketSameLine: false,
       parser: 'babylon',
       semi: true,
-      progress: false
+      progress: false,
+      cursorOffset: 1 // only for formatWithCursor
     });
 
     const progress = options.progress;
@@ -120,10 +121,10 @@ function prettierTask(grunt) {
         codeFiles.map(function(filepath) {
           unformattedCode = grunt.file.read(filepath);
           formattedCode = apiCall(
-              unformattedCode,
-              Object.assign({}, options, {
-                parser: getParser(filepath, options.parser)
-              })
+            unformattedCode,
+            Object.assign({}, options, {
+              parser: getParser(filepath, options.parser)
+            })
           );
           if (api === 'check') {
             // if we're just checking, output results to stdout, not the file
@@ -152,10 +153,10 @@ function prettierTask(grunt) {
         });
 
         formattedCode = apiCall(
-            unformattedCode.join(''),
-            Object.assign({}, options, {
-              parser: getParser(codeFiles[0], options.parser)
-            })
+          unformattedCode.join(''),
+          Object.assign({}, options, {
+            parser: getParser(codeFiles[0], options.parser)
+          })
         );
         grunt.file.write(f.dest, formattedCode);
         if (progress) {
