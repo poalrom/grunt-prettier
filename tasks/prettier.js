@@ -47,7 +47,23 @@ function getParser(file, defaultParser) {
 }
 
 function prettierTask(grunt) {
-  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function() {
+  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function(
+    api
+  ) {
+    if (!api) {
+      // default to format API if not specified
+      api = 'format';
+    }
+
+    var supportedApis = ['check', 'format', 'formatWithCursor'];
+
+    if (supportedApis.indexOf(api) < 0) {
+      grunt.log.warn('unsupported API');
+      return false;
+    }
+
+    let apiCall = prettier[api];
+
     // Merge task-specific and/or target-specific options with these defaults.
     let options = this.options({
       configFile: '.prettierrc',
@@ -60,7 +76,8 @@ function prettierTask(grunt) {
       jsxBracketSameLine: false,
       parser: 'babylon',
       semi: true,
-      progress: false
+      progress: false,
+      cursorOffset: 1 // only for formatWithCursor
     });
 
     const progress = options.progress;
@@ -101,29 +118,43 @@ function prettierTask(grunt) {
       let formattedCode, unformattedCode;
 
       if (typeof f.dest === 'undefined') {
+        let checkStatus = true;
         // If f.dest is undefined, then write formatted code to original files.
         codeFiles.map(function(filepath) {
           unformattedCode = grunt.file.read(filepath);
-          formattedCode = prettier.format(
+          formattedCode = apiCall(
             unformattedCode,
             Object.assign({}, options, {
               parser: getParser(filepath, options.parser)
             })
           );
-          grunt.file.write(filepath, formattedCode);
+          if (api === 'check') {
+            // if we're just checking, output results to stdout, not the file
+            grunt.log.writeln(filepath, formattedCode);
+            if (formattedCode == false) {
+              checkStatus = false;
+            }
+          } else {
+            grunt.file.write(filepath, formattedCode);
+          }
+
           if (progress) {
             bar.tick();
           } else {
             grunt.log.writeln('Prettify file "' + filepath + '".');
           }
         });
+
+        if (!checkStatus) {
+          grunt.fail.warn('Some files are not pretty');
+        }
       } else {
         // Else concat files and write to destination file.
         unformattedCode = codeFiles.map(function(filepath) {
           return grunt.file.read(filepath);
         });
 
-        formattedCode = prettier.format(
+        formattedCode = apiCall(
           unformattedCode.join(''),
           Object.assign({}, options, {
             parser: getParser(codeFiles[0], options.parser)

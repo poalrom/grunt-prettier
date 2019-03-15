@@ -1,0 +1,8 @@
+Running "prettier:check_unformatted_file:check" (prettier) task
+tmp/unformatted_write_to_original_file_to_check.js false
+Prettify file "tmp/unformatted_write_to_original_file_to_check.js".
+tmp/formatted_write_to_original_file_to_check.js true
+Prettify file "tmp/formatted_write_to_original_file_to_check.js".
+Warning: Some files are not pretty Used --force, continuing.
+
+Done, but with warnings.

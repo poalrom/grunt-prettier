@@ -92,6 +92,15 @@ function tasks(grunt) {
           '!tmp/write_to_original_file_with_globe/*skip.js'
         ]
       },
+      write_to_original_file_to_check: {
+        src: ['tmp/formatted_write_to_original_file_to_check.js']
+      },
+      check_unformatted_file: {
+        src: [
+          'tmp/unformatted_write_to_original_file_to_check.js',
+          'tmp/formatted_write_to_original_file_to_check.js'
+        ]
+      },
       grunt_file: {
         src: ['Gruntfile.js', 'tasks/**.*', 'test/prettier_test.js']
       }
@@ -118,6 +127,29 @@ function tasks(grunt) {
             dest: 'tmp/write_to_original_file_with_globe/'
           }
         ]
+      },
+      write_to_original_file_to_check: {
+        files: {
+          'tmp/unformatted_write_to_original_file_to_check.js':
+            'test/fixtures/write_to_original_file/unformatted.js',
+          'tmp/formatted_write_to_original_file_to_check.js':
+            'test/expected/write_to_original_file/formatted.js'
+        }
+      },
+      check_unformatted_file: {
+        files: {
+          // just creating the folder and the empty file. Will be filled in once exec:quiet_prettier_check is run
+          'tmp/check_unformatted_file/results':
+            'test/fixtures/check_unformatted_file/results'
+        }
+      }
+    },
+    exec: {
+      quiet_prettier_check: {
+        command:
+          'grunt prettier:check_unformatted_file:check --force > tmp/check_unformatted_file/results',
+        stdout: true,
+        stderr: true
       }
     }
   });
@@ -129,10 +161,17 @@ function tasks(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-exec');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'copy', 'prettier', 'nodeunit']);
+  grunt.registerTask('test', [
+    'clean',
+    'copy',
+    'exec:quiet_prettier_check',
+    'prettier',
+    'nodeunit'
+  ]);
 
   // By default, run all tests.
   grunt.registerTask('default', ['test']);
