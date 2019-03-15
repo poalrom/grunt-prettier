@@ -146,7 +146,7 @@ function prettierTask(grunt) {
         });
 
         if (!checkStatus) {
-          grunt.fail.warn('some files not pretty');
+          grunt.fail.warn('Some files are not pretty');
         }
       } else {
         // Else concat files and write to destination file.
