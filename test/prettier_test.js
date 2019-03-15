@@ -160,5 +160,24 @@ exports.prettier = {
     );
 
     test.done();
+  },
+
+  check_unformatted_files: function(test) {
+    test.expect(1);
+
+    let check_results_actual = grunt.file.read(
+      'tmp/check_unformatted_file/results'
+    );
+    let check_results_expected = grunt.file.read(
+      'test/expected/check_unformatted_file/results'
+    );
+
+    test.equal(
+      check_results_actual,
+      check_results_expected,
+      'Check results are not the same!'
+    );
+
+    test.done();
   }
 };

@@ -47,7 +47,9 @@ function getParser(file, defaultParser) {
 }
 
 function prettierTask(grunt) {
-  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function(api) {
+  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function(
+    api
+  ) {
     if (!api) {
       // default to format API if not specified
       api = 'format';
@@ -56,7 +58,7 @@ function prettierTask(grunt) {
     var supportedApis = ['check', 'format', 'formatWithCursor'];
 
     if (supportedApis.indexOf(api) < 0) {
-      grunt.log.warn('unsupported API')
+      grunt.log.warn('unsupported API');
       return false;
     }
 
@@ -86,8 +88,8 @@ function prettierTask(grunt) {
     if (fs.existsSync(prettierrcPath)) {
       grunt.verbose.writeln(`Using options from ${options.configFile}`);
       const prettierrcOptions = options.configFile.endsWith('.js')
-          ? require(options.configFile)
-          : grunt.file.readYAML(options.configFile);
+        ? require(options.configFile)
+        : grunt.file.readYAML(options.configFile);
       options = Object.assign({}, options, prettierrcOptions);
     }
     delete options.configFile;
@@ -144,7 +146,7 @@ function prettierTask(grunt) {
         });
 
         if (!checkStatus) {
-          grunt.fail.warn('some files not pretty')
+          grunt.fail.warn('some files not pretty');
         }
       } else {
         // Else concat files and write to destination file.
