@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/poalrom/grunt-prettier.svg?branch=master)](https://travis-ci.org/poalrom/grunt-prettier)
 [![npm version](https://badge.fury.io/js/grunt-prettier.svg)](https://badge.fury.io/js/grunt-prettier)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4db7a8ea778068692759/maintainability)](https://codeclimate.com/github/poalrom/grunt-prettier/maintainability)
+[![GitHub stars](https://img.shields.io/github/stars/poalrom/grunt-prettier.svg)](https://github.com/poalrom/grunt-prettier/stargazers)
 > Prettier plugin for Grunt
 
 ## Getting Started
