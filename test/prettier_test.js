@@ -24,10 +24,10 @@ const grunt = require('grunt'),
  */
 
 exports.prettier = {
-  setUp: function(done) {
+  setUp: function (done) {
     done();
   },
-  override_with_prettierrc: function(test) {
+  override_with_prettierrc: function (test) {
     test.expect(1);
 
     let actual = grunt.file.read('tmp/formatted_override_with_prettierrc.js');
@@ -38,7 +38,7 @@ exports.prettier = {
 
     test.done();
   },
-  concat_files: function(test) {
+  concat_files: function (test) {
     test.expect(1);
 
     let actual = grunt.file.read('tmp/formatted_concat_files.js');
@@ -47,7 +47,7 @@ exports.prettier = {
 
     test.done();
   },
-  concat_with_globe: function(test) {
+  concat_with_globe: function (test) {
     test.expect(1);
 
     let actual = grunt.file.read('tmp/formatted_concat_with_globe.js');
@@ -58,13 +58,13 @@ exports.prettier = {
 
     test.done();
   },
-  different_extensions: function(test) {
+  different_extensions: function (test) {
     let filesWithDifferentExtension = fs.readdirSync(
       './test/fixtures/different_extensions'
     );
     test.expect(filesWithDifferentExtension.length);
 
-    filesWithDifferentExtension.forEach(file => {
+    filesWithDifferentExtension.forEach((file) => {
       console.log(`File ${file}`);
       let actual = grunt.file.read(`tmp/different_extensions/${file}`);
       let expected = grunt.file.read(
@@ -75,7 +75,7 @@ exports.prettier = {
 
     test.done();
   },
-  write_to_original_file: function(test) {
+  write_to_original_file: function (test) {
     test.expect(2);
 
     let actual = grunt.file.read(
@@ -90,7 +90,7 @@ exports.prettier = {
 
     test.done();
   },
-  write_to_original_file_with_globe: function(test) {
+  write_to_original_file_with_globe: function (test) {
     test.expect(7);
 
     let actual_formatted_1 = grunt.file.read(
@@ -162,7 +162,7 @@ exports.prettier = {
     test.done();
   },
 
-  check_unformatted_files: function(test) {
+  check_unformatted_files: function (test) {
     test.expect(1);
 
     let check_results_actual = grunt.file.read(

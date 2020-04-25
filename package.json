@@ -21,13 +21,13 @@
     }
   ],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 10.0.0"
   },
   "scripts": {
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "^1.0.3",
+    "grunt": "^1.1.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-nodeunit": "^2.0.0",
@@ -43,7 +43,7 @@
     "grunt-less-prettify"
   ],
   "dependencies": {
-    "prettier": "^1.16.0",
+    "prettier": "^2.0.5",
     "progress": "^2.0.0"
   }
 }
