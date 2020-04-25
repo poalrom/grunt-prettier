@@ -120,6 +120,8 @@ To run unit tests
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+*2.0* - Update prettier to v2. Fix npm audit issues  
+*1.3* - Just update dependencies  
 *1.2* - Add support for the check and formatWithCursor  
 *1.1* - Add progress bar support  
 *1.0* - Update grunt version to major because of vunerable dependencies. Update prettier version with small fixes  
