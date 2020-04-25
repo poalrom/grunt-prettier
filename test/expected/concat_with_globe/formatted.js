@@ -11,7 +11,7 @@ var OPTIONS = [
   'doc'
 ];
 function setOptions(options) {
-  OPTIONS.forEach(function(option) {
+  OPTIONS.forEach(function (option) {
     var elem = document.getElementById(option);
     if (elem.tagName === 'SELECT') {
       elem.value = options[option];
@@ -25,7 +25,7 @@ function setOptions(options) {
 
 function getOptions() {
   var options = {};
-  OPTIONS.forEach(function(option) {
+  OPTIONS.forEach(function (option) {
     var elem = document.getElementById(option);
     if (elem.tagName === 'SELECT') {
       options[option] = elem.value;
@@ -60,7 +60,7 @@ function replaceHash(hash) {
 
 function format() {
   var options = getOptions();
-  [docEditor, outputEditor].forEach(function(editor) {
+  [docEditor, outputEditor].forEach(function (editor) {
     editor.setOption('rulers', [
       { column: options.printWidth, color: '#444444' }
     ]);
@@ -141,7 +141,7 @@ var OPTIONS = [
   'doc'
 ];
 function setOptions(options) {
-  OPTIONS.forEach(function(option) {
+  OPTIONS.forEach(function (option) {
     var elem = document.getElementById(option);
     if (elem.tagName === 'SELECT') {
       elem.value = options[option];
@@ -155,7 +155,7 @@ function setOptions(options) {
 
 function getOptions() {
   var options = {};
-  OPTIONS.forEach(function(option) {
+  OPTIONS.forEach(function (option) {
     var elem = document.getElementById(option);
     if (elem.tagName === 'SELECT') {
       options[option] = elem.value;
@@ -190,7 +190,7 @@ function replaceHash(hash) {
 
 function format() {
   var options = getOptions();
-  [docEditor, outputEditor].forEach(function(editor) {
+  [docEditor, outputEditor].forEach(function (editor) {
     editor.setOption('rulers', [
       { column: options.printWidth, color: '#444444' }
     ]);

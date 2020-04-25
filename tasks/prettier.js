@@ -15,12 +15,12 @@ const prettier = require('prettier'),
 
 let fileExtToParser = {};
 let fileNameToParser = {};
-prettier.getSupportInfo().languages.forEach(lang => {
-  lang.extensions.forEach(extension => {
+prettier.getSupportInfo().languages.forEach((lang) => {
+  lang.extensions.forEach((extension) => {
     fileExtToParser[extension] = lang.parsers;
   });
   if (lang.filenames) {
-    lang.filenames.forEach(filename => {
+    lang.filenames.forEach((filename) => {
       fileNameToParser[filename] = lang.parsers;
     });
   }
@@ -47,7 +47,7 @@ function getParser(file, defaultParser) {
 }
 
 function prettierTask(grunt) {
-  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function(
+  grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function (
     api
   ) {
     if (!api) {
@@ -95,9 +95,9 @@ function prettierTask(grunt) {
     delete options.configFile;
 
     // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
+    this.files.forEach(function (f) {
       // Check specified files.
-      let codeFiles = f.src.filter(function(filepath) {
+      let codeFiles = f.src.filter(function (filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
@@ -120,7 +120,7 @@ function prettierTask(grunt) {
       if (typeof f.dest === 'undefined') {
         let checkStatus = true;
         // If f.dest is undefined, then write formatted code to original files.
-        codeFiles.map(function(filepath) {
+        codeFiles.map(function (filepath) {
           unformattedCode = grunt.file.read(filepath);
           formattedCode = apiCall(
             unformattedCode,
@@ -150,7 +150,7 @@ function prettierTask(grunt) {
         }
       } else {
         // Else concat files and write to destination file.
-        unformattedCode = codeFiles.map(function(filepath) {
+        unformattedCode = codeFiles.map(function (filepath) {
           return grunt.file.read(filepath);
         });
 
