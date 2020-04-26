@@ -74,7 +74,7 @@ function prettierTask(grunt) {
       trailingComma: 'none',
       bracketSpacing: true,
       jsxBracketSameLine: false,
-      parser: 'babylon',
+      parser: 'babel',
       semi: true,
       progress: false,
       cursorOffset: 1 // only for formatWithCursor
