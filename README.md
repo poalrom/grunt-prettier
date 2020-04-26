@@ -120,6 +120,7 @@ To run unit tests
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+*2.1* - Update default parser name
 *2.0* - Update prettier to v2. Fix npm audit issues  
 *1.3* - Just update dependencies  
 *1.2* - Add support for the check and formatWithCursor  
