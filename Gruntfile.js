@@ -101,6 +101,12 @@ function tasks(grunt) {
           'tmp/formatted_write_to_original_file_to_check.js'
         ]
       },
+      parser_overrides: {
+        files: {
+          'tmp/parser_overrides/.firebaserc':
+            'test/fixtures/parser_overrides/.firebaserc'
+        }
+      },
       grunt_file: {
         src: ['Gruntfile.js', 'tasks/**.*', 'test/prettier_test.js']
       }

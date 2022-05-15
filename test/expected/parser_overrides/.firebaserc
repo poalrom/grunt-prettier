@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "project-name"
+  },
+  "targets": {
+    "project-name": {
+      "hosting": {
+        "production": ["project-name"],
+        "test": ["project-name-test"],
+        "staging": ["project-name-staging"]
+      }
+    }
+  }
+}
