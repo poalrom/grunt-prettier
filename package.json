@@ -1,7 +1,7 @@
 {
   "name": "grunt-prettier",
   "description": "Prettier plugin for Grunt",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "homepage": "https://github.com/poalrom/grunt-prettier",
   "author": {
     "name": "Alex Popkov",
