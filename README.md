@@ -123,6 +123,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - [Config overrides](https://prettier.io/docs/en/configuration.html#configuration-overrides) works only in .prettierrc, not in task config
 
 ## Release History
+*2.2* - Add support for overrides. Use internal prettier mechanism for parser detecting
 *2.1* - Update default parser name
 *2.0* - Update prettier to v2. Fix npm audit issues  
 *1.3* - Just update dependencies  
