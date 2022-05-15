@@ -179,5 +179,21 @@ exports.prettier = {
     );
 
     test.done();
+  },
+
+  parser_overrides: function (test) {
+    let filesForParserOverride = fs.readdirSync(
+      './test/fixtures/parser_overrides'
+    );
+    test.expect(filesForParserOverride.length);
+
+    filesForParserOverride.forEach((file) => {
+      console.log(`File ${file}`);
+      let actual = grunt.file.read(`tmp/parser_overrides/${file}`);
+      let expected = grunt.file.read(`test/expected/parser_overrides/${file}`);
+      test.equal(actual, expected, 'Formatting should be equal expected!');
+    });
+
+    test.done();
   }
 };

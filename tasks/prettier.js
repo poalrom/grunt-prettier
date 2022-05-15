@@ -10,59 +10,106 @@
 
 const prettier = require('prettier'),
   path = require('path'),
-  fs = require('fs'),
   ProgressBar = require('progress');
 
-let fileExtToParser = {};
-let fileNameToParser = {};
-prettier.getSupportInfo().languages.forEach((lang) => {
-  lang.extensions.forEach((extension) => {
-    fileExtToParser[extension] = lang.parsers;
-  });
-  if (lang.filenames) {
-    lang.filenames.forEach((filename) => {
-      fileNameToParser[filename] = lang.parsers;
-    });
+function getApiCall(api) {
+  if (!api) {
+    // default to format API if not specified
+    api = 'format';
   }
-});
 
-function getParser(file, defaultParser) {
-  let fileExt = path.extname(file);
-  let fileName = path.basename(file);
-  if (fileExtToParser.hasOwnProperty(fileExt)) {
-    let parser =
-      defaultParser in fileExtToParser[fileExt]
-        ? defaultParser
-        : fileExtToParser[fileExt][0];
-    return parser;
+  var supportedApis = ['check', 'format', 'formatWithCursor'];
+
+  if (supportedApis.indexOf(api) < 0) {
+    throw new Error('unsupported API');
   }
-  if (fileNameToParser.hasOwnProperty(fileName)) {
-    let parser =
-      defaultParser in fileNameToParser[fileName]
-        ? defaultParser
-        : fileNameToParser[fileName][0];
-    return parser;
+
+  return prettier[api];
+}
+
+function getFileConfig(file, configPath) {
+  return {
+    parser: prettier.getFileInfo.sync(file, { resolveConfig: true })
+      .inferredParser,
+    ...prettier.resolveConfig.sync(file, {
+      config: configPath
+    })
+  };
+}
+
+function formatFilesInplace(
+  codeFiles,
+  options,
+  { bar, grunt, apiCall, api, configPath }
+) {
+  let checkStatus = true;
+
+  codeFiles.forEach(function (filepath) {
+    const unformattedCode = grunt.file.read(filepath);
+
+    // const parser = getParser(filepath, options);
+
+    const formattedCode = apiCall(unformattedCode, {
+      ...options,
+      ...getFileConfig(filepath, configPath)
+    });
+    if (api === 'check') {
+      // if we're just checking, output results to stdout, not the file
+      grunt.log.writeln(filepath, formattedCode);
+      if (formattedCode == false) {
+        checkStatus = false;
+      }
+    } else {
+      grunt.file.write(filepath, formattedCode);
+    }
+
+    if (bar) {
+      bar.tick();
+    } else {
+      grunt.log.writeln('Prettify file "' + filepath + '".');
+    }
+  });
+
+  if (!checkStatus) {
+    grunt.fail.warn('Some files are not pretty');
   }
-  return defaultParser;
+}
+
+function formatFilesAndWriteToDest(
+  codeFiles,
+  options,
+  { bar, grunt, apiCall, dest, configPath }
+) {
+  const unformattedCode = codeFiles.map(function (filepath) {
+    return grunt.file.read(filepath);
+  });
+
+  const formattedCode = apiCall(unformattedCode.join(''), {
+    ...options,
+    ...getFileConfig(codeFiles[0], configPath)
+  });
+
+  grunt.file.write(dest, formattedCode);
+
+  if (bar) {
+    bar.tick();
+  } else {
+    grunt.log.writeln('Prettify file "' + dest + '".');
+  }
 }
 
 function prettierTask(grunt) {
   grunt.registerMultiTask('prettier', 'Prettier plugin for Grunt', function (
     api
   ) {
-    if (!api) {
-      // default to format API if not specified
-      api = 'format';
-    }
+    let apiCall;
 
-    var supportedApis = ['check', 'format', 'formatWithCursor'];
-
-    if (supportedApis.indexOf(api) < 0) {
-      grunt.log.warn('unsupported API');
+    try {
+      apiCall = getApiCall(api);
+    } catch (e) {
+      grunt.log.warn(e.message);
       return false;
     }
-
-    let apiCall = prettier[api];
 
     // Merge task-specific and/or target-specific options with these defaults.
     let options = this.options({
@@ -74,7 +121,6 @@ function prettierTask(grunt) {
       trailingComma: 'none',
       bracketSpacing: true,
       jsxBracketSameLine: false,
-      parser: 'babel',
       semi: true,
       progress: false,
       cursorOffset: 1 // only for formatWithCursor
@@ -84,18 +130,13 @@ function prettierTask(grunt) {
     delete options.progress;
 
     // If .prettierrc file exists, load it and override existing options
-    let prettierrcPath = path.resolve() + path.sep + options.configFile;
-    if (fs.existsSync(prettierrcPath)) {
-      grunt.verbose.writeln(`Using options from ${options.configFile}`);
-      const prettierrcOptions = options.configFile.endsWith('.js')
-        ? require(options.configFile)
-        : grunt.file.readYAML(options.configFile);
-      options = Object.assign({}, options, prettierrcOptions);
-    }
+    const configPath = options.configFile
+      ? path.resolve() + path.sep + options.configFile
+      : undefined;
     delete options.configFile;
 
     // Iterate over all specified file groups.
-    this.files.forEach(function (f) {
+    this.files.forEach((f) => {
       // Check specified files.
       let codeFiles = f.src.filter(function (filepath) {
         // Warn on and remove invalid source files (if nonull was set).
@@ -115,57 +156,24 @@ function prettierTask(grunt) {
         });
       }
 
-      let formattedCode, unformattedCode;
-
       if (typeof f.dest === 'undefined') {
-        let checkStatus = true;
         // If f.dest is undefined, then write formatted code to original files.
-        codeFiles.map(function (filepath) {
-          unformattedCode = grunt.file.read(filepath);
-          formattedCode = apiCall(
-            unformattedCode,
-            Object.assign({}, options, {
-              parser: getParser(filepath, options.parser)
-            })
-          );
-          if (api === 'check') {
-            // if we're just checking, output results to stdout, not the file
-            grunt.log.writeln(filepath, formattedCode);
-            if (formattedCode == false) {
-              checkStatus = false;
-            }
-          } else {
-            grunt.file.write(filepath, formattedCode);
-          }
-
-          if (progress) {
-            bar.tick();
-          } else {
-            grunt.log.writeln('Prettify file "' + filepath + '".');
-          }
+        formatFilesInplace(codeFiles, options, {
+          bar,
+          grunt,
+          apiCall,
+          api,
+          configPath
         });
-
-        if (!checkStatus) {
-          grunt.fail.warn('Some files are not pretty');
-        }
       } else {
         // Else concat files and write to destination file.
-        unformattedCode = codeFiles.map(function (filepath) {
-          return grunt.file.read(filepath);
+        formatFilesAndWriteToDest(codeFiles, options, {
+          bar,
+          grunt,
+          apiCall,
+          dest: f.dest,
+          configPath
         });
-
-        formattedCode = apiCall(
-          unformattedCode.join(''),
-          Object.assign({}, options, {
-            parser: getParser(codeFiles[0], options.parser)
-          })
-        );
-        grunt.file.write(f.dest, formattedCode);
-        if (progress) {
-          bar.tick();
-        } else {
-          grunt.log.writeln('Prettify file "' + f.dest + '".');
-        }
       }
     });
   });

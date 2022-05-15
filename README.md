@@ -119,6 +119,9 @@ To run unit tests
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
+## Known issues
+- [Config overrides](https://prettier.io/docs/en/configuration.html#configuration-overrides) works only in .prettierrc, not in task config
+
 ## Release History
 *2.1* - Update default parser name
 *2.0* - Update prettier to v2. Fix npm audit issues  
